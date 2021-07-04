@@ -3,8 +3,8 @@ const chalk = require("chalk");
 var score = 0;
 
 function welcomeMessage(){
-var userName = readLineSync.question("\nPlease enter your name ");
-console.log("\nHi "+userName+'. Welcome to Quiz on "Stranger Things" ');
+var userName = readLineSync.question(chalk.italic.cyanBright("\nPlease enter your name "));
+console.log(chalk.bgMagentaBright("\nHi "+userName+'. Welcome to Quiz on "Stranger Things" '));
 }
 
 //console.log("1. Enter any key to continue\n2. Enter q to cancel ");
@@ -84,33 +84,37 @@ function greetingMessage(){
   var hours = ISTTime.getHours()
 
   if (hours < 12 && hours >4) {
-    console.log("Good morning!");
+    console.log(chalk.bold.bgBlue("Good morning!"));
   }else if(hours > 12 && hours< 18) {
-    console.log("Good afternoon!");
+    console.log(chalk.bold.bgBlue("Good afternoon!"));
   }else{
-    console.log("Good evening!");
+    console.log(chalk.bold.bgBlue("Good evening!"));
   }
 }
 
   function play(){
 for(let i=0; i < questionBank.length ; i++){
-  console.log("Question "+(i+1));
-  var currentQuestion = questionBank[i];
+  console.log(chalk.bgYellow("\nQuestion "+(i+1)));
+  var currentQuestion = (questionBank[i]);
 quiz(currentQuestion);
 }
-console.log("Thanks for playing!");
+console.log(chalk.bgGreenBright("Thanks for playing!"));
+console.log(chalk.bgMagenta("\nThe Highest Scores\n"));
 
-highScores.map(score => console.log(chalk.bgMagenta(score.name)+ " : "+ chalk.inverse(score.score)));
+highScores.map(score => console.log(chalk.yellowBright(score.name)+ " : "+ chalk.whiteBright(score.score)));
+
+console.log(chalk.bgCyan("\nIf your name should be here, dm me on Insta @rekha_25, I'll add your name to the highest scorers list :)"));  
   }
 function quiz(currentQuestion){
   
   var userAns =  readLineSync.question(currentQuestion.question);
   if(userAns.toLowerCase() === currentQuestion.answer.toLowerCase()){
-    console.log("You are right!");
+    console.log(chalk.green("You are right!"));
     score++;
   }
   else{
-  console.log("You are wrong!"); }
+  console.log(chalk.red("You are wrong!")); 
+  }
   console.log("Your current score is " +score);
   console.log("-----------------------------");
 }

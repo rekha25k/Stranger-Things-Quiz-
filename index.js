@@ -2,9 +2,10 @@ var readLineSync = require("readline-sync");
 const chalk = require("chalk");
 var score = 0;
 
-
-var userName = readLineSync.question("Please enter your name ");
-console.log("Hi "+userName+'. Welcome to Quiz on "Stranger Things" ');
+function welcomeMessage(){
+var userName = readLineSync.question("\nPlease enter your name ");
+console.log("\nHi "+userName+'. Welcome to Quiz on "Stranger Things" ');
+}
 
 //console.log("1. Enter any key to continue\n2. Enter q to cancel ");
 
@@ -72,7 +73,25 @@ var highScores = [
   }
 ]
 
-//function play(questionBank){
+function greetingMessage(){
+  var currentTime = new Date();
+  var currentOffset = currentTime.getTimezoneOffset();
+
+  var ISTOffset = 330;   // IST offset UTC +5:30 
+  var ISTTime = new Date(currentTime.getTime() + (ISTOffset + currentOffset)*60000);
+  // ISTTime now represents the time in IST coordinates
+
+  var hours = ISTTime.getHours()
+
+  if (hours < 12 && hours >4) {
+    console.log("Good morning!");
+  }else if(hours > 12 && hours< 18) {
+    console.log("Good afternoon!");
+  }else{
+    console.log("Good evening!");
+  }
+}
+
   function play(){
 for(let i=0; i < questionBank.length ; i++){
   console.log("Question "+(i+1));
@@ -96,4 +115,6 @@ function quiz(currentQuestion){
   console.log("-----------------------------");
 }
 
+greetingMessage();
+welcomeMessage();
 play();
